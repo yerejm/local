@@ -1,0 +1,555 @@
+" vim:set ft=vim et sw=2:
+
+" There is no vi, only vim
+set nocompatible
+
+if has('autocmd')
+  filetype plugin indent on
+endif
+
+" assume 256 color support is available
+set t_Co=256
+
+set encoding=utf-8
+
+" always have a status line
+set laststatus=2
+if has('cmdline_info')
+  " always show where the cursor is in the file in status
+  set ruler
+  " show incomplete cmds at the bottom
+  set showcmd
+endif
+
+" command line history
+set history=1000
+
+" command line completion menu
+if has('wildmenu')
+  set wildmenu
+  set wildmode=longest,list:longest
+  " ignore:
+  " compilation artifacts
+  set wildignore+=*.o,*.d
+  " version control
+  set wildignore+=.hg,.git
+endif
+
+" Timeout waiting for key codes to be received
+set ttimeout
+set ttimeoutlen=100
+
+if has('extra_search')
+  " highlight search term
+  set hlsearch
+  " search as you type
+  set incsearch
+  " Use <CTRL-L to clear highlighting
+  if maparg('<C-L>', 'n') ==# ''
+    nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+  endif
+endif
+
+if has('syntax')
+  syntax enable
+  " highlight current line
+  set cursorline
+  " highlight column after textwidth
+  set colorcolumn=+1
+endif
+
+" wrap text at 80 columns
+set textwidth=80
+
+" display tabs and trailing spaces
+set list
+" show tabs as "▸·"
+" show trailing spaces and non-breakable space as "·"
+" show long line indicator when wrap is off as "<" and ">"
+set listchars=tab:▸·,trail:·,nbsp:·,extends:>,precedes:<
+
+" always try to keep cursor in the same column
+set nostartofline
+
+" Minimal number of lines to keep above and below the cursor
+set scrolloff=3
+" Minimal number of columns to scroll horizontally
+set sidescroll=1
+" Minimal number of screen columns to keep left and right of
+" the cursor when scrolling
+set sidescrolloff=5
+
+" Display as much as possible of the last line in a window when it does not fit.
+" Don't replace with "@" indicators over line numbering.
+set display+=lastline
+
+" Do not automatically reload files detected as changed
+set noautoread
+
+" always include mac eol detection
+set fileformats+=mac
+
+set tabpagemax=50
+
+" show line numbers
+set number
+" show line number of active line, but relative numbers elsewhere
+set relativenumber
+
+" hide buffers when not displayed
+set hidden
+
+" confirm when changes are not saved (for hidden)
+set confirm
+
+" kill the beep by making it visual
+set novisualbell
+" kill the visual bell by making it do nothing
+set vb t_vb=
+
+" shorten messages, no search wrap messages, no intro
+set shortmess=atIs
+
+" Show the editing mode
+set showmode
+
+" show matching brackets
+set showmatch
+
+" local terminals
+set ttyfast
+
+" disable automatic line wrapping
+set nowrap
+" customise line breaking when wrapping
+if has('linebreak')
+  " wrap intelligently instead of last character that fits
+  set linebreak
+  " Indicate at the start of lines that have been wrapped
+  set showbreak="> "
+endif
+
+" don't remember options with the mksession command
+if has('mksession')
+  set sessionoptions-=options
+endif
+
+" Tell vim to remember certain things when we exit
+"  '10 : marks will be remembered for up to 10 previously edited files
+"  "100 : will save up to 100 lines for each register
+"  :20 : up to 20 lines of command-line history will be remembered
+"  % : saves and restores the buffer list
+"  h : forget search highlighting
+"  n... : where to save the viminfo files
+set viminfo='10,\"100,:20,%,h,n~/.vim/tmp/.viminfo
+
+" '//' at the end of the directory means use the absolute path as the shadow
+" file's file name to let a file of the same name with different contents from
+" stomping over each other.
+" enable backups
+set backup
+" backup location
+set backupdir=~/.vim/tmp/backup//
+" don't backup stuff like crontab
+set backupskip=/tmp/*,/private/tmp/*
+
+" enable swap file
+set swapfile
+" where to store the swap file
+set directory=~/.vim/tmp/swap//
+
+if has('persistent_undo')
+  set undofile
+  set undodir=~/.vim/tmp/undo//
+  set undoreload=10000
+  au BufWritePre /tmp/*,/private/tmp/* setlocal noundofile
+endif
+
+if has('autochdir')
+  " go to file's directory on open
+  set autochdir
+endif
+
+if has('windows')
+  " horizontal splits always grow down
+  set splitbelow
+endif
+
+if has('vertsplit')
+  " vertical splits always grow right
+  set splitright
+endif
+
+if has('virtualedit')
+  " allow virtual editing where there are no characters
+  " (ie allow different length lines to be blocked)
+  set virtualedit+=block
+endif
+
+" Automatically save the file when it loses focus.
+" (This is not GUI window focus.)
+set autowrite
+set autowriteall
+
+" Tab/spaces & Indentation settings (overridden in ftplugin)
+" use two spaces for tabs
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+set smarttab
+" no real tabs
+set expandtab
+" copy indent from current line when starting new line
+set autoindent
+" assume source code is where tabs are being used
+set cindent
+
+" Allow backspace over everything in insert mode
+set backspace=indent,eol,start
+
+" auto-formatting (global setting)
+" t - autowrap using textwidth
+" c - autowrap comments automatically inserting the current comment leader
+" q - allow formatting with 'gq'
+" r - insert comment leader on <Enter> in Insert mode
+" n - recognise:
+"       1. numbered lists, and
+"       2. wrap then to the text width
+set formatoptions=tcqrn
+if v:version > 703 || v:version == 703 && has("patch541")
+  " Where it makes sense, remove a comment leader when joining lines
+  set formatoptions+=j
+endif
+
+" tab completion
+" Scan for completion candidates from:
+"  1. the current buffer
+"  2. buffers in other windows
+"  3. other loaded buffers
+"  4. unloaded buffers
+"  5. tags
+"  6. included files
+set complete=.,w,b,u,t,i
+if has('insert_expand')
+  set completeopt=longest,menuone,preview
+endif
+
+" Don't let CTRL-A/CTRL-X work on octal
+" This is confusing for 0-padded sequences
+set nrformats-=octal
+
+set pastetoggle=<f11>
+
+"
+" equalise splits on vim window resize
+autocmd VimResized * exe "normal! \<c-w>="
+
+"
+" tmux
+"
+if exists('$TMUX')
+  set term=screen-256color
+endif
+
+if exists('$ITERM_PROFILE')
+  if exists('$TMUX')
+    let &t_SI="\<Esc>[3 q"
+    let &t_EI="\<Esc>[0 q"
+  else
+    let &t_SI="\<Esc>]50;CursorShape=1\x7"
+    let &t_EI="\<Esc>]50;CursorShape=0\x7"
+  endif
+endif
+
+" for tmux to automatically set paste and nopaste mode at the time of pasting
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+"
+" Jump to last cursor position when opening a file except commit logs
+"
+function! SetCursorPosition()
+  if &filetype !~ 'svn\|commit\c'
+    if line("'\"") > 0 && line("'\"") <= line("$")
+      exe "normal! g`\""
+      normal! zz
+    endif
+  endif
+endfunction
+autocmd BufReadPost * call SetCursorPosition()
+
+"
+" mouse in terminal (not mouse in gui)
+"
+if has('mouse')
+  set mouse=a
+  set ttymouse=xterm2
+
+  " mouse scrolling
+  map <M-Esc>[62~ <MouseDown>
+  map! <M-Esc>[62~ <MouseDown>
+  map <M-Esc>[63~ <MouseUp>
+  map! <M-Esc>[63~ <MouseUp>
+  map <M-Esc>[64~ <S-MouseDown>
+  map! <M-Esc>[64~ <S-MouseDown>
+  map <M-Esc>[65~ <S-MouseUp>
+  map! <M-Esc>[65~ <S-MouseUp>
+endif
+
+"
+" When running a vim gui (e.g. macvim)
+"
+if has('gui_running')
+  set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
+
+  set go-=T
+  set go-=l
+  set go-=L
+  set go-=r
+  set go-=R
+
+  highlight SpellBad term=underline gui=undercurl guisp=Orange
+
+  " pretty vertical split
+  set fillchars+=vert:│
+
+  autocmd FocusLost * silent! wa " auto-save on leaving vim window
+  set clipboard=unnamed " mac osx clipboard
+endif
+
+"
+" Key mappings and chords
+"
+" move by visible line, not actual line
+noremap k gk
+noremap j gj
+
+" keep search matches in the middle
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" map Q to reformat comment
+noremap Q gq
+
+" make Y consistent with C and D
+nnoremap Y y$
+
+" easier buffer navigation
+noremap <c-h> <c-w>h
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+
+" change tabs
+nnoremap <S-h> gT
+nnoremap <S-l> gt
+
+" DOWN WITH ARROW KEYS
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+inoremap <PageUp> <NOP>
+inoremap <PageDown> <NOP>
+inoremap <Home> <NOP>
+inoremap <End> <NOP>
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+noremap <PageUp> <NOP>
+noremap <PageDown> <NOP>
+noremap <Home> <NOP>
+noremap <End> <NOP>
+
+"
+" tab stuff from https://github.com/junegunn/dotfiles/blob/master/vimrc#L379-421
+"
+" ----------------------------------------------------------------------------
+" <tab> / <s-tab> | Circular windows navigation
+" ----------------------------------------------------------------------------
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
+
+" ----------------------------------------------------------------------------
+" <tab> / <s-tab> / <c-v><tab> | super-duper-tab
+" ----------------------------------------------------------------------------
+function! s:can_complete(func, prefix)
+  if empty(a:func) || call(a:func, [1, '']) < 0
+    return 0
+  endif
+  let result = call(a:func, [0, matchstr(a:prefix, '\k\+$')])
+  return !empty(type(result) == type([]) ? result : result.words)
+endfunction
+
+function! s:super_duper_tab(k, o)
+  if pumvisible()
+    return a:k
+  endif
+
+  let line = getline('.')
+  let col = col('.') - 2
+  if empty(line) || line[col] !~ '\k\|[/~.]' || line[col + 1] =~ '\k'
+    return a:o
+  endif
+
+  let prefix = expand(matchstr(line[0:col], '\S*$'))
+  if prefix =~ '^[~/.]'
+    return "\<c-x>\<c-f>"
+  endif
+  if s:can_complete(&omnifunc, prefix)
+    return "\<c-x>\<c-o>"
+  endif
+  if s:can_complete(&completefunc, prefix)
+    return "\<c-x>\<c-u>"
+  endif
+  return a:k
+endfunction
+
+inoremap <expr> <tab>   <SID>super_duper_tab("\<c-n>", "\<tab>")
+inoremap <expr> <s-tab> <SID>super_duper_tab("\<c-p>", "\<s-tab>")
+
+"
+" leader
+"
+let mapleader="\<space>"
+nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>w <C-w>v
+
+"
+" quickfix
+"
+nnoremap <Leader>] :cnext<cr>
+nnoremap <Leader>[ :cprev<cr>
+nnoremap <f4> :cclose<cr>
+
+
+" spell check commit log
+autocmd FileType svn,*commit* setlocal spell noundofile
+
+"
+" plugins
+"
+silent! if plug#begin('~/.vim/plugged')
+  Plug 'wombat256.vim' " colorscheme
+  Plug 'tomtom/tcomment_vim' " gc and gcc comment toggling
+  Plug 'bling/vim-airline' " powerline status line
+
+  " tmux
+  Plug 'christoomey/vim-tmux-navigator'
+
+  " navigation
+  Plug 'bufexplorer.zip'
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'kien/ctrlp.vim'
+  Plug 'mileszs/ack.vim'
+
+  " dev
+  if v:version >= 703
+    Plug 'majutsushi/tagbar' " c++ structure view
+  endif
+  Plug 'tpope/vim-fugitive' " git
+  Plug 'OmniCppComplete', { 'for': 'cpp' }
+  call plug#end()
+endif
+
+"
+" colorscheme
+"
+set background=dark
+try
+  colorscheme wombat256mod
+catch
+  colorscheme darkblue
+endtry
+
+"
+" vim-airline
+"
+" vim-airline shows the mode in its status line, so there is no need to
+" duplicate it in the status line if the plugin is loaded.
+" This is loaded at plugin initialisation because the setting used to verify
+" whether the plugin is loaded is not available during vimrc load.
+function! HideStatusMode()
+  if exists('g:loaded_airline')
+    set noshowmode
+  endif
+endfunction
+augroup plugin_initialize
+  autocmd!
+  autocmd VimEnter * call HideStatusMode()
+augroup END
+let g:airline_powerline_fonts = 1
+
+"
+" tmux-nagivator
+"
+let g:tmux_navigator_save_on_switch = 1
+
+"
+" bufexplorer
+"
+nnoremap <f1> :BufExplorer<cr>
+
+"
+" nerdtree
+"
+let g:NERDTreeMouseMode = 2
+let g:NERDTreeWinSize = 40
+autocmd FileType nerdtree setlocal nolist
+nnoremap <f2> :NERDTreeToggle<cr>
+
+"
+"ctrlp
+"
+let g:ctrlp_open_new_file = 'v' " open new in vsplit
+let g:ctrlp_open_multiple_files = 'v' " open in vsplit
+
+"
+" ack
+" :Ack <search-term>
+"
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+"
+" tagbar
+"
+if v:version >= 703
+nnoremap <f8> :TagbarToggle<cr>
+endif
+
+"
+" omnicppcomplete
+"
+" Show sig prototypes
+let OmniCpp_ShowPrototypeInAbbr=1
+" Popup members of :: scope
+let OmniCpp_MayCompleteScope = 1
+
+"
+" Extra localised or experimental vimrc settings are loaded from file.
+"
+let s:local_vimrc = fnamemodify(resolve(expand('<sfile>')), ':p:h') . '/vimrc-local'
+if filereadable(s:local_vimrc)
+  execute 'source' s:local_vimrc
+endif
+
