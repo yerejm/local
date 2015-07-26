@@ -12,6 +12,10 @@ alias la="${LS} -ltahbF --color=auto"
 alias lr="${LS} -ltrahbF --color=auto"
 unset LS
 
+if which mdfind > /dev/null; then
+  alias locate="mdfind -name"
+fi
+
 alias x=exit
 
 alias vi="vim"
