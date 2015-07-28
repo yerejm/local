@@ -1,6 +1,0 @@
-[submodule "darwin/brew-install"]
-	path = darwin/brew-install
-	url = https://github.com/Homebrew/install.git
-[submodule "dotfiles/vim/fonts"]
-	path = dotfiles/vim/fonts
-	url = https://github.com/powerline/fonts.git
