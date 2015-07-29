@@ -2,6 +2,10 @@
 # The shoulders of giants
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 
+set -o errexit
+set -o nounset
+set -o pipefail
+
 APPS=
 
 # Ask for the administrator password upfront
@@ -235,7 +239,7 @@ APPS+=" Mail"
 # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 # Load new settings before rebuilding the index
-killall mds > /dev/null 2>&1
+killall mds > /dev/null 2>&1 || true
 # Make sure indexing is enabled for the main volume
 sudo mdutil -i on / > /dev/null
 # Rebuild the index from scratch
@@ -285,5 +289,5 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 ###############################################################################
 
 for app in ${APPS}; do
-  killall "${app}" > /dev/null 2>&1
+  killall "${app}" > /dev/null 2>&1 || true
 done
