@@ -4,11 +4,20 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-CURDIR=$(pwd)
+CURDIR=$(dirname "${0}")
+FONT="https://github.com/powerline/fonts/raw/master/Meslo/Meslo%20LG%20S%20Regular%20for%20Powerline.otf"
+FONT_INSTALLER="https://raw.githubusercontent.com/powerline/fonts/master/install.sh"
 
 # install vim fonts
 [ -d "${HOME}/Library" ] && mkdir -p "${HOME}/Library/Fonts"
-bash fonts/install.sh
+fontdir="${CURDIR}/fonts"
+if [ ! -d "$fontdir" ]; then
+  mkdir -p "$fontdir" && (\
+    cd "${fontdir}" && curl -J -L -O "${FONT}" && \
+    curl -J -L -O  "${FONT_INSTALLER}" && \
+    bash install.sh \
+    )
+fi
 
 # install dotfile
 ln -f -s "${CURDIR}/vimrc" "${HOME}/.vimrc"
