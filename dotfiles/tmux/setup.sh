@@ -4,12 +4,12 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-CURDIR="$(pwd)"
+CURDIR=$(dirname "${0}")
 
 # install dotfile
 ln -f -s "${CURDIR}/tmux.conf" "${HOME}/.tmux.conf"
 
-TMUX_TPM_DIR=~/.tmux/plugins/tpm
+TMUX_TPM_DIR="${HOME}/.tmux/plugins/tpm"
 if [ -e "${TMUX_TPM_DIR}" ]; then
   echo "Updating tmux tpm" && (cd "${TMUX_TPM_DIR}" && git pull)
 else

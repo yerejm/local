@@ -9,7 +9,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-CURDIR=$(pwd)
+CURDIR=$(dirname "${0}")
 
 if [ -d "$ZSH" ]; then
   (cd "${ZSH}" && git pull)
@@ -32,3 +32,4 @@ fi
 unset TEST_CURRENT_SHELL
 
 ln -f -s "${CURDIR}/inputrc" "${HOME}/.inputrc"
+

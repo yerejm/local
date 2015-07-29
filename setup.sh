@@ -10,7 +10,7 @@ if [ -z "${BASH_VERSION}" ]; then
   exit 1
 fi
 
-BASE_DIR=$(dirname "$(pwd)/${0}")
+CURDIR=$(dirname "$(pwd)/${0}")
 
 case $OSTYPE in
   darwin*) platform="${OSTYPE//[0-9.]/}" ;;
@@ -20,12 +20,22 @@ case $OSTYPE in
     exit
     ;;
 esac
-platformdir="${BASE_DIR}/${platform}"
-[[ -d "${platformdir}" ]] && (cd "${platformdir}" && bash setup.sh)
+platformdir="${CURDIR}/${platform}"
+if [ -d "${platformdir}" ]; then
+  echo "#################################################################"
+  echo "# PLATFORM SET UP - $(basename "${platformdir}")"
+  echo "#################################################################"
+  bash "${platformdir}/setup.sh"
+fi
 
-for moddir in ${BASE_DIR}/dotfiles/*; do
-  [[ -d "${moddir}" ]] && (cd "${moddir}" && bash setup.sh)
+for moddir in ${CURDIR}/dotfiles/*; do
+  if [ -d "${moddir}" ]; then
+    echo "#################################################################"
+    echo "# DOTFILE SET UP - $(basename "${moddir}")"
+    echo "#################################################################"
+    bash "${moddir}/setup.sh"
+  fi
 done
 
-echo "Restart required."
+echo "A restart will be required."
 exit 0
