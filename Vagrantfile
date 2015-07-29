@@ -8,15 +8,6 @@ def enable_3d(cfg)
   end
 end
 
-# def enable_vagrant_ssh(cfg)
-#   pkey_file = "#{ENV['HOME']}/.ssh/id_rsa.pub"
-#   pkey = File.read(pkey_file)
-#   cfg.vm.provision 'shell',
-#     privileged: false,
-#     inline:
-#       "echo '#{pkey}' >> ~/.ssh/authorized_keys"
-# end
-
 def ram2g(cfg)
   cfg.vm.provider "virtualbox" do |v|
     v.cpus = 2
@@ -34,7 +25,6 @@ def osx(cfg)
   cfg.ssh.insert_key = false
   cfg.vm.synced_folder ".", "/vagrant", :disabled => true
   cfg.vm.synced_folder ".", "/Users/vagrant/local", type: "rsync"
-  # enable_vagrant_ssh(cfg)
 end
 
 Vagrant.configure("2") do |config|
