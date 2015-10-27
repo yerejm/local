@@ -37,5 +37,9 @@ for moddir in ${CURDIR}/dotfiles/*; do
   fi
 done
 
+if [ ! -d "${HOME}/.ssh" ]; then
+  ssh-keygen -t rsa -b 4096
+fi
+
 echo "A restart will be required."
 exit 0
