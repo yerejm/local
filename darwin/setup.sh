@@ -21,6 +21,6 @@ if [ ! -e "/usr/local/bin/brew" ]; then
 fi
 brew tap Homebrew/bundle
 brew bundle --file="${CURDIR}/Brewfile"
-
+bash "${CURDIR}/postinstall.sh"
 bash "${CURDIR}/defaults.sh"
 
