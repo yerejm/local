@@ -351,6 +351,9 @@ noremap Q gq
 " make Y consistent with C and D
 nnoremap Y y$
 
+" sudo save when vim without privilege
+cmap w!! w !sudo tee > /dev/null %
+
 " easier buffer navigation
 noremap <c-h> <c-w>h
 noremap <c-j> <c-w>j
