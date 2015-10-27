@@ -1,10 +1,10 @@
-" vim:set ft=vim et sw=2:
+" vim:set ft=vim et sw=4:
 
 " There is no vi, only vim
 set nocompatible
 
 if has('autocmd')
-  filetype plugin indent on
+    filetype plugin indent on
 endif
 
 " assume 256 color support is available
@@ -15,10 +15,10 @@ set encoding=utf-8
 " always have a status line
 set laststatus=2
 if has('cmdline_info')
-  " always show where the cursor is in the file in status
-  set ruler
-  " show incomplete cmds at the bottom
-  set showcmd
+    " always show where the cursor is in the file in status
+    set ruler
+    " show incomplete cmds at the bottom
+    set showcmd
 endif
 
 " command line history
@@ -26,13 +26,13 @@ set history=1000
 
 " command line completion menu
 if has('wildmenu')
-  set wildmenu
-  set wildmode=longest,list:longest
-  " ignore:
-  " compilation artifacts
-  set wildignore+=*.o,*.d
-  " version control
-  set wildignore+=.hg,.git
+    set wildmenu
+    set wildmode=longest,list:longest
+    " ignore:
+    " compilation artifacts
+    set wildignore+=*.o,*.d
+    " version control
+    set wildignore+=.hg,.git
 endif
 
 " Timeout waiting for key codes to be received
@@ -40,22 +40,22 @@ set ttimeout
 set ttimeoutlen=100
 
 if has('extra_search')
-  " highlight search term
-  set hlsearch
-  " search as you type
-  set incsearch
-  " Use <CTRL-L to clear highlighting
-  if maparg('<C-L>', 'n') ==# ''
-    nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
-  endif
+    " highlight search term
+    set hlsearch
+    " search as you type
+    set incsearch
+    " Use <CTRL-L to clear highlighting
+    if maparg('<C-L>', 'n') ==# ''
+        nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+    endif
 endif
 
 if has('syntax')
-  syntax enable
-  " highlight current line
-  set cursorline
-  " highlight column after textwidth
-  set colorcolumn=+1
+    syntax enable
+    " highlight current line
+    set cursorline
+    " highlight column after textwidth
+    set colorcolumn=+1
 endif
 
 " wrap text at 80 columns
@@ -123,15 +123,15 @@ set ttyfast
 set nowrap
 " customise line breaking when wrapping
 if has('linebreak')
-  " wrap intelligently instead of last character that fits
-  set linebreak
-  " Indicate at the start of lines that have been wrapped
-  set showbreak="> "
+    " wrap intelligently instead of last character that fits
+    set linebreak
+    " Indicate at the start of lines that have been wrapped
+    set showbreak="> "
 endif
 
 " don't remember options with the mksession command
 if has('mksession')
-  set sessionoptions-=options
+    set sessionoptions-=options
 endif
 
 " Tell vim to remember certain things when we exit
@@ -159,31 +159,31 @@ set swapfile
 set directory=~/.vim/tmp/swap//
 
 if has('persistent_undo')
-  set undofile
-  set undodir=~/.vim/tmp/undo//
-  set undoreload=10000
-  au BufWritePre /tmp/*,/private/tmp/* setlocal noundofile
+    set undofile
+    set undodir=~/.vim/tmp/undo//
+    set undoreload=10000
+    au BufWritePre /tmp/*,/private/tmp/* setlocal noundofile
 endif
 
 if has('autochdir')
-  " go to file's directory on open
-  set autochdir
+    " go to file's directory on open
+    set autochdir
 endif
 
 if has('windows')
-  " horizontal splits always grow down
-  set splitbelow
+    " horizontal splits always grow down
+    set splitbelow
 endif
 
 if has('vertsplit')
-  " vertical splits always grow right
-  set splitright
+    " vertical splits always grow right
+    set splitright
 endif
 
 if has('virtualedit')
-  " allow virtual editing where there are no characters
-  " (ie allow different length lines to be blocked)
-  set virtualedit+=block
+    " allow virtual editing where there are no characters
+    " (ie allow different length lines to be blocked)
+    set virtualedit+=block
 endif
 
 " Automatically save the file when it loses focus.
@@ -217,8 +217,8 @@ set backspace=indent,eol,start
 "       2. wrap then to the text width
 set formatoptions=tcqrn
 if v:version > 703 || v:version == 703 && has("patch541")
-  " Where it makes sense, remove a comment leader when joining lines
-  set formatoptions+=j
+    " Where it makes sense, remove a comment leader when joining lines
+    set formatoptions+=j
 endif
 
 " tab completion
@@ -231,7 +231,7 @@ endif
 "  6. included files
 set complete=.,w,b,u,t,i
 if has('insert_expand')
-  set completeopt=longest,menuone,preview
+    set completeopt=longest,menuone,preview
 endif
 
 " Don't let CTRL-A/CTRL-X work on octal
@@ -248,37 +248,37 @@ autocmd VimResized * exe "normal! \<c-w>="
 " tmux
 "
 if exists('$TMUX')
-  set term=screen-256color
+    set term=screen-256color
 endif
 
 if exists('$ITERM_PROFILE')
-  if exists('$TMUX')
-    let &t_SI="\<Esc>[3 q"
-    let &t_EI="\<Esc>[0 q"
-  else
-    let &t_SI="\<Esc>]50;CursorShape=1\x7"
-    let &t_EI="\<Esc>]50;CursorShape=0\x7"
-  endif
+    if exists('$TMUX')
+        let &t_SI="\<Esc>[3 q"
+        let &t_EI="\<Esc>[0 q"
+    else
+        let &t_SI="\<Esc>]50;CursorShape=1\x7"
+        let &t_EI="\<Esc>]50;CursorShape=0\x7"
+    endif
 endif
 
 " for tmux to automatically set paste and nopaste mode at the time of pasting
 function! WrapForTmux(s)
-  if !exists('$TMUX')
-    return a:s
-  endif
+    if !exists('$TMUX')
+        return a:s
+    endif
 
-  let tmux_start = "\<Esc>Ptmux;"
-  let tmux_end = "\<Esc>\\"
+    let tmux_start = "\<Esc>Ptmux;"
+    let tmux_end = "\<Esc>\\"
 
-  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+    return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
 endfunction
 let &t_SI .= WrapForTmux("\<Esc>[?2004h")
 let &t_EI .= WrapForTmux("\<Esc>[?2004l")
 
 function! XTermPasteBegin()
-  set pastetoggle=<Esc>[201~
-  set paste
-  return ""
+    set pastetoggle=<Esc>[201~
+    set paste
+    return ""
 endfunction
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
@@ -286,12 +286,12 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 " Jump to last cursor position when opening a file except commit logs
 "
 function! SetCursorPosition()
-  if &filetype !~ 'svn\|commit\c'
-    if line("'\"") > 0 && line("'\"") <= line("$")
-      exe "normal! g`\""
-      normal! zz
+    if &filetype !~ 'svn\|commit\c'
+        if line("'\"") > 0 && line("'\"") <= line("$")
+            exe "normal! g`\""
+            normal! zz
+        endif
     endif
-  endif
 endfunction
 autocmd BufReadPost * call SetCursorPosition()
 
@@ -299,39 +299,39 @@ autocmd BufReadPost * call SetCursorPosition()
 " mouse in terminal (not mouse in gui)
 "
 if has('mouse')
-  set mouse=a
-  set ttymouse=xterm2
+    set mouse=a
+    set ttymouse=xterm2
 
-  " mouse scrolling
-  map <M-Esc>[62~ <MouseDown>
-  map! <M-Esc>[62~ <MouseDown>
-  map <M-Esc>[63~ <MouseUp>
-  map! <M-Esc>[63~ <MouseUp>
-  map <M-Esc>[64~ <S-MouseDown>
-  map! <M-Esc>[64~ <S-MouseDown>
-  map <M-Esc>[65~ <S-MouseUp>
-  map! <M-Esc>[65~ <S-MouseUp>
+    " mouse scrolling
+    map <M-Esc>[62~ <MouseDown>
+    map! <M-Esc>[62~ <MouseDown>
+    map <M-Esc>[63~ <MouseUp>
+    map! <M-Esc>[63~ <MouseUp>
+    map <M-Esc>[64~ <S-MouseDown>
+    map! <M-Esc>[64~ <S-MouseDown>
+    map <M-Esc>[65~ <S-MouseUp>
+    map! <M-Esc>[65~ <S-MouseUp>
 endif
 
 "
 " When running a vim gui (e.g. macvim)
 "
 if has('gui_running')
-  set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
+    set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
 
-  set go-=T
-  set go-=l
-  set go-=L
-  set go-=r
-  set go-=R
+    set go-=T
+    set go-=l
+    set go-=L
+    set go-=r
+    set go-=R
 
-  highlight SpellBad term=underline gui=undercurl guisp=Orange
+    highlight SpellBad term=underline gui=undercurl guisp=Orange
 
-  " pretty vertical split
-  set fillchars+=vert:│
+    " pretty vertical split
+    set fillchars+=vert:│
 
-  autocmd FocusLost * silent! wa " auto-save on leaving vim window
-  set clipboard=unnamed " mac osx clipboard
+    autocmd FocusLost * silent! wa " auto-save on leaving vim window
+    set clipboard=unnamed " mac osx clipboard
 endif
 
 "
@@ -392,35 +392,35 @@ nnoremap <S-tab> <c-w>W
 " <tab> / <s-tab> / <c-v><tab> | super-duper-tab
 " ----------------------------------------------------------------------------
 function! s:can_complete(func, prefix)
-  if empty(a:func) || call(a:func, [1, '']) < 0
-    return 0
-  endif
-  let result = call(a:func, [0, matchstr(a:prefix, '\k\+$')])
-  return !empty(type(result) == type([]) ? result : result.words)
+    if empty(a:func) || call(a:func, [1, '']) < 0
+        return 0
+    endif
+    let result = call(a:func, [0, matchstr(a:prefix, '\k\+$')])
+    return !empty(type(result) == type([]) ? result : result.words)
 endfunction
 
 function! s:super_duper_tab(k, o)
-  if pumvisible()
+    if pumvisible()
+        return a:k
+    endif
+
+    let line = getline('.')
+    let col = col('.') - 2
+    if empty(line) || line[col] !~ '\k\|[/~.]' || line[col + 1] =~ '\k'
+        return a:o
+    endif
+
+    let prefix = expand(matchstr(line[0:col], '\S*$'))
+    if prefix =~ '^[~/.]'
+        return "\<c-x>\<c-f>"
+    endif
+    if s:can_complete(&omnifunc, prefix)
+        return "\<c-x>\<c-o>"
+    endif
+    if s:can_complete(&completefunc, prefix)
+        return "\<c-x>\<c-u>"
+    endif
     return a:k
-  endif
-
-  let line = getline('.')
-  let col = col('.') - 2
-  if empty(line) || line[col] !~ '\k\|[/~.]' || line[col + 1] =~ '\k'
-    return a:o
-  endif
-
-  let prefix = expand(matchstr(line[0:col], '\S*$'))
-  if prefix =~ '^[~/.]'
-    return "\<c-x>\<c-f>"
-  endif
-  if s:can_complete(&omnifunc, prefix)
-    return "\<c-x>\<c-o>"
-  endif
-  if s:can_complete(&completefunc, prefix)
-    return "\<c-x>\<c-u>"
-  endif
-  return a:k
 endfunction
 
 inoremap <expr> <tab>   <SID>super_duper_tab("\<c-n>", "\<tab>")
@@ -448,26 +448,26 @@ autocmd FileType svn,*commit* setlocal spell noundofile
 " plugins
 "
 silent! if plug#begin('~/.vim/plugged')
-  Plug 'wombat256.vim' " colorscheme
-  Plug 'tomtom/tcomment_vim' " gc and gcc comment toggling
-  Plug 'bling/vim-airline' " powerline status line
+Plug 'wombat256.vim' " colorscheme
+Plug 'tomtom/tcomment_vim' " gc and gcc comment toggling
+Plug 'bling/vim-airline' " powerline status line
 
-  " tmux
-  Plug 'christoomey/vim-tmux-navigator'
+" tmux
+Plug 'christoomey/vim-tmux-navigator'
 
-  " navigation
-  Plug 'bufexplorer.zip'
-  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-  Plug 'kien/ctrlp.vim'
-  Plug 'mileszs/ack.vim'
+" navigation
+Plug 'bufexplorer.zip'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'kien/ctrlp.vim'
+Plug 'mileszs/ack.vim'
 
-  " dev
-  if v:version >= 703
+" dev
+if v:version >= 703
     Plug 'majutsushi/tagbar' " c++ structure view
-  endif
-  Plug 'tpope/vim-fugitive' " git
-  Plug 'OmniCppComplete', { 'for': 'cpp' }
-  call plug#end()
+endif
+Plug 'tpope/vim-fugitive' " git
+Plug 'OmniCppComplete', { 'for': 'cpp' }
+call plug#end()
 endif
 
 "
@@ -475,9 +475,9 @@ endif
 "
 set background=dark
 try
-  colorscheme wombat256mod
+    colorscheme wombat256mod
 catch
-  colorscheme darkblue
+    colorscheme darkblue
 endtry
 
 "
@@ -488,13 +488,13 @@ endtry
 " This is loaded at plugin initialisation because the setting used to verify
 " whether the plugin is loaded is not available during vimrc load.
 function! HideStatusMode()
-  if exists('g:loaded_airline')
-    set noshowmode
-  endif
+    if exists('g:loaded_airline')
+        set noshowmode
+    endif
 endfunction
 augroup plugin_initialize
-  autocmd!
-  autocmd VimEnter * call HideStatusMode()
+    autocmd!
+    autocmd VimEnter * call HideStatusMode()
 augroup END
 let g:airline_powerline_fonts = 1
 
@@ -527,14 +527,14 @@ let g:ctrlp_open_multiple_files = 'v' " open in vsplit
 " :Ack <search-term>
 "
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+    let g:ackprg = 'ag --vimgrep'
 endif
 
 "
 " tagbar
 "
 if v:version >= 703
-nnoremap <f8> :TagbarToggle<cr>
+    nnoremap <f8> :TagbarToggle<cr>
 endif
 
 "
@@ -550,6 +550,6 @@ let OmniCpp_MayCompleteScope = 1
 "
 let s:local_vimrc = fnamemodify(resolve(expand('<sfile>')), ':p:h') . '/vimrc-local'
 if filereadable(s:local_vimrc)
-  execute 'source' s:local_vimrc
+    execute 'source' s:local_vimrc
 endif
 
