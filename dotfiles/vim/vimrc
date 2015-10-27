@@ -193,9 +193,9 @@ set autowriteall
 
 " Tab/spaces & Indentation settings (overridden in ftplugin)
 " use two spaces for tabs
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 set smarttab
 " no real tabs
 set expandtab
