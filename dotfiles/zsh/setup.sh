@@ -19,7 +19,7 @@ fi
 
 ln -f -s "${CURDIR}/zshrc" "${HOME}/.zshrc"
 
-for f in custom/*.zsh; do
+for f in ${CURDIR}/custom/*.zsh; do
   if [ -e "${CURDIR}/${f}" ]; then
     ln -f -s "${CURDIR}/${f}" "${ZSH}/${f}"
   fi
