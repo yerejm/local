@@ -29,3 +29,6 @@ cask 'vagrant'
 cask 'virtualbox'
 
 cask 'flux'
+cask 'menumeters'
+
+brew 'python3'
