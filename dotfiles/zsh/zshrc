@@ -89,6 +89,9 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Enable better mv, e.g. zmv '(*).md' '$1.markdown' for mass extension change
+autoload -U zmv
+
 LOCAL_ENV="$(dirname $(readlink ~/.zshrc))/zshrc-local"
 if [ -f "$LOCAL_ENV" ]; then
   . "$LOCAL_ENV"
