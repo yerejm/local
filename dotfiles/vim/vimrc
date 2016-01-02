@@ -524,6 +524,8 @@ nnoremap <f2> :NERDTreeToggle<cr>
 "
 let g:ctrlp_open_new_file = 'v' " open new in vsplit
 let g:ctrlp_open_multiple_files = 'v' " open in vsplit
+" Use .gitignore if it exists to filter files
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 "
 " ack
