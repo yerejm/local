@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-CURDIR=$(dirname "${0}")
+CURDIR=$(dirname "$(pwd)/${0}")
 
 # install dotfile
 ln -f -s "${CURDIR}/tmux.conf" "${HOME}/.tmux.conf"
@@ -16,4 +16,3 @@ else
   mkdir -p "$(dirname "${TMUX_TPM_DIR}")"
   git clone https://github.com/tmux-plugins/tpm "${TMUX_TPM_DIR}"
 fi
-

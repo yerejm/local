@@ -9,7 +9,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-CURDIR=$(dirname "${0}")
+CURDIR=$(dirname "$(pwd)/${0}")
 
 if [ -d "$ZSH" ]; then
   (cd "${ZSH}" && git pull)
@@ -25,11 +25,9 @@ for f in ${CURDIR}/custom/*.zsh; do
   fi
 done
 
-TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
-if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
+if ! grep '/usr/local/bin/zsh' /etc/shells > /dev/null; then
+    sudo bash -c "echo '/usr/local/bin/zsh' >> /etc/shells"
     chsh -s "$(grep '/zsh$' /etc/shells | tail -1)"
 fi
-unset TEST_CURRENT_SHELL
 
 ln -f -s "${CURDIR}/inputrc" "${HOME}/.inputrc"
-

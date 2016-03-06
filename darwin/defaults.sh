@@ -20,84 +20,50 @@ sudo nvram SystemAudioVolume=" "
 #
 # Global Settings
 #
-
-#
-# Keyboard
-#
-# Enable key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
-# Enable full keyboard access for all controls
-# (e.g. enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-
-# Faster key repeat
-defaults write NSGlobalDomain KeyRepeat -int 2
-
-# Shorter delay on starting key repeat
-defaults write NSGlobalDomain InitialKeyRepeat -int 25
-
-# Use Function keys as standard function keysi, i.e. F1 is F1, not dim display
-defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
-
-# No smart quotes
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-
+defaults write "Apple Global Domain" AppleActionOnDoubleClick -string "None"
+defaults write "Apple Global Domain" AppleInterfaceStyle -string "Dark"
+defaults write "Apple Global Domain" AppleShowAllExtensions -bool true
+defaults write "Apple Global Domain" AppleShowScrollBars -string "Always"
 # No smart dashes
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-
-#
-# Trackpad/Mouse
-#
-defaults write NSGlobalDomain com.apple.trackpad.scaling -int 2
-defaults write NSGlobalDomain com.apple.mouse.scaling -int 3
-defaults write NSGlobalDomain com.apple.scrollwheel.scaling -float 1.7
-
+defaults write "Apple Global Domain" NSAutomaticDashSubstitutionEnabled -bool false
+# No smart quotes
+defaults write "Apple Global Domain" NSAutomaticQuoteSubstitutionEnabled -bool false
+# No spelling autocorrect
+defaults write "Apple Global Domain" NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write "Apple Global Domain" WebAutomaticSpellingCorrectionEnabled -bool false
+# Use Function keys as standard function keysi, i.e. F1 is F1, not dim display
+defaults write "Apple Global Domain" com.apple.keyboard.fnState -bool true
+# When changing volume, give audio feedback
+defaults write "Apple Global Domain" com.apple.sound.beep.feedback -bool true
 # Disable "natural" scroll
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
-
-# Always show scollbars
-defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
-
-# Show file extensions
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
-# Stop spelling autocorrect
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write "Apple Global Domain" com.apple.swipescrolldirection -bool false
+defaults write "Apple Global Domain" com.apple.trackpad.scaling -int 2
 
 # Expand the open/save dialogs
-defaults write NSGlobalDomain NSNavPanelFileLastListModeForOpenModeKey -int 1
-defaults write NSGlobalDomain NSNavPanelFileLastListModeForSaveModeKey -int 1
-defaults write NSGlobalDomain NSNavPanelFileListModeForOpenMode2 -int 1
-defaults write NSGlobalDomain NSNavPanelFileListModeForSaveMode2 -int 1
-defaults write NSGlobalDomain NavPanelFileListModeForOpenMode -int 1
-defaults write NSGlobalDomain NavPanelFileListModeForSaveMode -int 1
+defaults write "Apple Global Domain" NSNavPanelFileLastListModeForOpenModeKey -bool true
+defaults write "Apple Global Domain" NSNavPanelFileListModeForOpenMode2 -bool true
+defaults write "Apple Global Domain" NavPanelFileListModeForOpenMode -bool true
+
+defaults write "Apple Global Domain" NSNavPanelFileLastListModeForSaveModeKey -bool true
+defaults write "Apple Global Domain" NSNavPanelFileListModeForSaveMode2 -bool true
+defaults write "Apple Global Domain" NavPanelFileListModeForSaveMode -bool true
 
 # Expand save panel by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write "Apple Global Domain" NSNavPanelExpandedStateForSaveMode -bool true
+defaults write "Apple Global Domain" NSNavPanelExpandedStateForSaveMode2 -bool true
 
 # Expand print panel by default
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+defaults write "Apple Global Domain" PMPrintingExpandedStateForPrint -bool true
+defaults write "Apple Global Domain" PMPrintingExpandedStateForPrint2 -bool true
 
 # Save to disk (not to iCloud) by default
-defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+defaults write "Apple Global Domain" NSDocumentSaveNewDocumentsToCloud -bool false
 
+#
+# LaunchServices
+#
 # Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-#
-# Printing
-#
-# Automatically quit printer app once the print jobs complete
-defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-
-#
-# Universal Access
-#
-# Disable transparency (e.g. in the menu bar)
-defaults write com.apple.universalaccess reduceTransparency -bool true
 
 #
 # Trackpad
@@ -107,35 +73,71 @@ defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -i
 defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -int 0
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
-defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 2
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0
+
+defaults write com.apple.AppleBluetoothMultitouch.trackpad Clicking -int 1
+defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadRightClick -int 0
+defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
+defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 0
+
+#
+# Menubar
+#
+PLISTBUDDY=/usr/libexec/plistbuddy
+PLIST=$HOME/Library/Preferences/com.apple.systemuiserver.plist
+$PLISTBUDDY -c "add :menuExtras:0 string '/System/Library/CoreServices/Menu Extras/Bluetooth.menu'" $PLIST
+$PLISTBUDDY -c "add :menuExtras:0 string '/System/Library/CoreServices/Menu Extras/TimeMachine.menu'" $PLIST
+$PLISTBUDDY -c "add :menuExtras:0 string '/System/Library/CoreServices/Menu Extras/Volume.menu'" $PLIST
 
 #
 # Dock
 #
 defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock expose-group-apps -bool true
 defaults write com.apple.dock orientation -string "right"
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 APPS+=" Dock"
+
+#
+# Lookup
+#
+defaults write com.apple.lookup.lookupEnabled suggestionsEnabled -bool false
+
+#
+# Clock
+#
+defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM  h:mm:ss a"
+defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
+defaults write com.apple.menuextra.clock IsAnalog -bool false
+
+#
+# Dictation
+#
+defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs DictationIMUseOnlyOfflineDictation -bool true
+
+#
+# Universal Access
+#
+# Disable transparency (e.g. in the menu bar)
+defaults write com.apple.universalaccess reduceTransparency -bool true
 
 #
 # Finder
 #
-defaults write com.apple.finder AppleShowAllExtensions -bool true
-defaults write com.apple.finder AppleShowAllFiles -bool true
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-defaults write com.apple.finder QLEnableTextSelection -bool true
+# Use column view in all Finder windows by default
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+defaults write com.apple.finder FinderSpawnTab -bool false
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+defaults write com.apple.finder NewWindowTargetPath -string "file:///Users/${HOME}"
+defaults write com.apple.finder ShowRecentTags -bool false
 defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
-defaults write com.apple.finder EmptyTrashSecurely -bool true
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
-defaults write com.apple.finder NewWindowTarget -string "PfHm"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
-
-# Use column view in all Finder windows by default
-# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+# Don't create .DS_Store on a network share
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool false
 
 # Show ~/Library
 chflags nohidden ~/Library
@@ -144,69 +146,51 @@ APPS+=" Finder"
 #
 # Safari
 #
-# Privacy: don’t send search queries to Apple
-defaults write com.apple.Safari UniversalSearchEnabled -bool false
-defaults write com.apple.Safari SuppressSearchSuggestions -bool true
-
+defaults write com.apple.Safari AlwaysRestoreSessionAtLaunch -bool true
+defaults write com.apple.Safari AlwaysShowFavoritesBarInFullScreen -bool false
 # Do not save any personal data
 defaults write com.apple.Safari AutoFillFromAddressBook -bool false
 defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
 defaults write com.apple.Safari AutoFillPasswords -bool false
 defaults write com.apple.Safari AutoFillCreditCardData -bool false
-
-# Ignore pushy sites
-defaults write com.apple.Safari CanPromptForPushNotifications -bool false
-
-# Press Tab to highlight each item on a web page
-defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
-
-# Show the full URL in the address bar (note: this still hides the scheme)
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
-
+# Prevent Safari from opening ‘safe’ files automatically after downloading
+defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+defaults write com.apple.Safari DownloadsClearingPolicy -int 1
 # Set Safari’s home page to `about:blank` for faster loading
 defaults write com.apple.Safari HomePage -string "about:blank"
-
+# Enable the Develop menu and the Web Inspector in Safari
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
 # Open on blank page always (do not show Top Sites)
 defaults write com.apple.Safari NewTabBehavior -int 1
 defaults write com.apple.Safari NewWindowBehavior -int 1
-
-# Prevent Safari from opening ‘safe’ files automatically after downloading
-defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
-
-# Allow hitting the Backspace key to go to the previous page in history
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
-
+defaults write com.apple.Safari PreloadTopHit -bool false
+# Show the full URL in the address bar (note: this still hides the scheme)
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+# Privacy: don’t send search queries to Apple
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+# Enable the Web Inspector in Safari
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+# Ignore pushy sites
+defaults write com.apple.Safari CanPromptForPushNotifications -bool false
 # Assume a UTF-8 world
 defaults write com.apple.Safari WebKitDefaultTextEncodingName -string "utf-8"
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DefaultTextEncodingName -string "utf-8"
-
-# Hide Safari’s bookmarks bar by default
-defaults write com.apple.Safari ShowFavoritesBar -bool false
-
-# Hide Safari’s sidebar in Top Sites
-defaults write com.apple.Safari ShowSidebarInTopSites -bool false
-
-# Disable Safari’s thumbnail cache for History and Top Sites
-defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
-
-# Enable Safari’s debug menu
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-
+# Press Tab to highlight each item on a web page
+defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
+# Allow hitting the Backspace key to go to the previous page in history
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
 # Make Safari’s search banners default to Contains instead of Starts With
 defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 
-# Remove useless icons from Safari’s bookmarks bar
-defaults write com.apple.Safari ProxiesInBookmarksBar "()"
-
-# Enable the Develop menu and the Web Inspector in Safari
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-
-# Add a context menu item for showing the Web Inspector in web views
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 APPS+=" Safari"
+
+#
+# Printing
+#
+# Automatically quit printer app once the print jobs complete
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 #
 # Mail
@@ -246,13 +230,6 @@ sudo mdutil -i on / > /dev/null
 sudo mdutil -E / > /dev/null
 
 #
-# Clock
-#
-defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM  h:mm:ss a"
-defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
-defaults write com.apple.menuextra.clock IsAnalog -bool false
-
-#
 # Screensaver
 #
 defaults write com.apple.screensaver askForPassword -int 1
@@ -278,16 +255,17 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # Disable local Time Machine backups
 hash tmutil &> /dev/null && sudo tmutil disablelocal
 
-#
-# iTerm2
-#
-# Don’t display the annoying prompt when quitting iTerm
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
-
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
-
+killall cfprefsd
 for app in ${APPS}; do
   killall "${app}" > /dev/null 2>&1 || true
 done
+
+# https://fix-macosx.com
+if [ ! -d fix-macosx ]; then
+  git clone --depth 1 https://github.com/fix-macosx/fix-macosx fix-macosx
+  ( cd fix-macosx && python fix-macosx.py ) && rm -rf fix-macosx
+fi
+

@@ -317,7 +317,7 @@ endif
 " When running a vim gui (e.g. macvim)
 "
 if has('gui_running')
-    set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
+    set guifont=meslo-powerline:h14
 
     set go-=T
     set go-=l

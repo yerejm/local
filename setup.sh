@@ -20,20 +20,23 @@ case $OSTYPE in
     exit
     ;;
 esac
-platformdir="${CURDIR}/${platform}"
-if [ -d "${platformdir}" ]; then
-  echo "#################################################################"
-  echo "# PLATFORM SET UP - $(basename "${platformdir}")"
-  echo "#################################################################"
-  bash "${platformdir}/setup.sh"
-fi
 
-for moddir in ${CURDIR}/dotfiles/*; do
-  if [ -d "${moddir}" ]; then
+# ask for sudo only once
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+setups="${platform} dotfiles"
+for setup in ${setups}; do
+  setup_dir="${CURDIR}/${setup}"
+  if [ -d "${setup_dir}" ]; then
     echo "#################################################################"
-    echo "# DOTFILE SET UP - $(basename "${moddir}")"
+    echo "# EXECUTING SET UP - ${setup}"
     echo "#################################################################"
-    bash "${moddir}/setup.sh"
+    if [ -f "${setup_dir}/setup.sh" ]; then
+      ( cd ${setup_dir} && bash setup.sh ) && echo "${setup} complete."
+    else
+      echo "WARNING: No setup detected. Skipping..."
+    fi
   fi
 done
 
