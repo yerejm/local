@@ -29,6 +29,6 @@ cask 'vagrant'
 cask 'virtualbox'
 
 cask 'flux'
-cask 'menumeters'
+cask 'yujitach-menumeters'
 
 brew 'python3'
