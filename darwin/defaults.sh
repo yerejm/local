@@ -24,6 +24,7 @@ defaults write "Apple Global Domain" AppleActionOnDoubleClick -string "None"
 defaults write "Apple Global Domain" AppleInterfaceStyle -string "Dark"
 defaults write "Apple Global Domain" AppleShowAllExtensions -bool true
 defaults write "Apple Global Domain" AppleShowScrollBars -string "Always"
+defaults write "Apple Global Domain" ContextMenuGesture -int 1
 # No smart dashes
 defaults write "Apple Global Domain" NSAutomaticDashSubstitutionEnabled -bool false
 # No smart quotes
@@ -75,12 +76,12 @@ defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0
 
-defaults write com.apple.AppleBluetoothMultitouch.trackpad Clicking -int 1
-defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadRightClick -int 0
-defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
-defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 0
-defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 0
 
 #
 # Menubar
