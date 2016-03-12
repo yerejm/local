@@ -137,6 +137,20 @@ defaults write com.apple.finder ShowRecentTags -bool false
 defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
+defaults write com.apple.finder.ComputerViewSettings CustomViewStyleVersion -int 1
+defaults write com.apple.finder DownloadsFolderListViewSettingsVersion -int 1
+# Search from current folder by default
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+defaults write com.apple.finder ShowPreviewPane -bool false
+defaults write com.apple.finder ShowSidebar -bool true
+defaults write com.apple.sidebarlists.networkbrowser Controller -string "CustomListItems"
+defaults write com.apple.sidebarlists.networkbrowser CustomListItems -array
+defaults write com.apple.sidebarlists.networkbrowser CustomListProperties -dict \
+    "com.apple.NetworkBrowser.backToMyMacEnabled" 0 \
+    "com.apple.NetworkBrowser.bonjourEnabled" 0 \
+    "com.apple.NetworkBrowser.connectedEnabled" 0
+defaults write com.apple.sidebarlists.systemitems ShowEjectables -bool false
+
 # Don't create .DS_Store on a network share
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool false
 
