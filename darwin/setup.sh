@@ -25,6 +25,17 @@ if [ ! -e "/usr/local/bin/brew" ]; then
 fi
 brew tap Homebrew/bundle
 brew bundle --file="${CURDIR}/Brewfile"
-bash "${CURDIR}/postinstall.sh"
-bash "${CURDIR}/defaults.sh"
+
+# https://fix-macosx.com
+if [ ! -d fix-macosx ]; then
+  git clone --depth 1 https://github.com/fix-macosx/fix-macosx fix-macosx
+  ( cd fix-macosx && python fix-macosx.py ) && rm -rf fix-macosx
+fi
+
+if ! grep cachier "$HOME/.vagrant.d/plugins.json" >/dev/null 2>&1; then
+  vagrant plugin install vagrant-cachier
+fi
+if ! grep hostsupdater "$HOME/.vagrant.d/plugins.json" >/dev/null 2>&1; then
+  vagrant plugin install vagrant-hostsupdater
+fi
 
