@@ -24,7 +24,7 @@ brew 'shellcheck'
 brew 'valgrind'
 
 brew 'ansible'
-cask 'packer'
+brew 'packer'
 cask 'vagrant'
 cask 'virtualbox'
 
