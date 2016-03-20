@@ -20,8 +20,8 @@ fi
 ln -f -s "${CURDIR}/zshrc" "${HOME}/.zshrc"
 
 for f in ${CURDIR}/custom/*.zsh; do
-  if [ -e "${CURDIR}/${f}" ]; then
-    ln -f -s "${CURDIR}/${f}" "${ZSH}/${f}"
+  if [ -e "${f}" ]; then
+      ( cd "${ZSH}/custom" && ln -f -s "${f}" )
   fi
 done
 

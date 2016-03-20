@@ -97,7 +97,7 @@ unset zle_bracketed_paste # because it breaks url pasting
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
-LOCAL_ENV="$(dirname $(readlink ~/.zshrc))/zshrc-local"
+LOCAL_ENV="$HOME/.zshrc-local"
 if [ -f "$LOCAL_ENV" ]; then
   . "$LOCAL_ENV"
 fi
