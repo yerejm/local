@@ -20,6 +20,7 @@ brew 'mercurial'
 brew 'cmake'
 brew 'shellcheck'
 brew 'valgrind'
+brew 'llvm', args: [ 'with-clang-extra-tools', 'with-clang' ]
 
 brew 'ansible'
 brew 'packer'
