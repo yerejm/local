@@ -10,7 +10,7 @@ brew 'wget'
 brew 'tmux'
 brew 'reattach-to-user-namespace'
 
-brew 'vim'
+brew 'vim', args: [ 'without-perl', 'without-ruby' ]
 brew 'ctags'
 brew 'the_platinum_searcher'
 
