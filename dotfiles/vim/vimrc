@@ -438,11 +438,31 @@ nnoremap <Leader>w <C-w>v
 
 "
 " quickfix
-"
-nnoremap <Leader>] :cnext<cr>
-nnoremap <Leader>[ :cprev<cr>
-nnoremap <f4> :cclose<cr>
+" http://bitbucket.org/sjl/dotfiles/src/tip/vim/
+command! -bang -nargs=? QFixToggle call QFixToggle(<bang>0)
+function! QFixToggle(forced)
+  if exists("g:qfix_win") && a:forced == 0
+    cclose
+    unlet g:qfix_win
+  else
+    copen 10
+    let g:qfix_win = bufnr("$")
+  endif
+endfunction
 
+nmap <silent> <f4> :QFixToggle<cr>
+
+"
+" grep
+" :grep <search-term>
+"
+if executable('pt')
+    " goes to quickfix
+    set grepprg=pt\ --nogroup\ --nocolor\ --column
+    set grepformat=%f:%l:%c%m
+    nmap <silent> <right> :cnext<cr>
+    nmap <silent> <left> :cprev<cr>
+endif
 
 " spell check commit log
 autocmd FileType svn,*commit* setlocal spell noundofile
@@ -455,16 +475,13 @@ Plug 'wombat256.vim' " colorscheme
 Plug 'tomtom/tcomment_vim' " gc and gcc comment toggling
 Plug 'bling/vim-airline' " powerline status line
 
-Plug 'Shougo/vimproc.vim'
-Plug 'Shougo/unite.vim'
-
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
 
 " navigation
 Plug 'bufexplorer.zip'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " dev
 if v:version >= 703
@@ -472,6 +489,7 @@ if v:version >= 703
 endif
 Plug 'tpope/vim-fugitive' " git
 Plug 'OmniCppComplete', { 'for': 'cpp' }
+Plug 'rhysd/vim-clang-format'
 call plug#end()
 endif
 
@@ -530,24 +548,6 @@ let g:ctrlp_open_multiple_files = 'v' " open in vsplit
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 "
-" ack
-" :Ack <search-term>
-"
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
-nnoremap <silent> <Leader>/ :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-nnoremap <silent> <Leader>? :<C-u>UniteResume<CR>
-nnoremap <silent> <Leader>n :<C-u>UniteNext<CR>
-nnoremap <silent> <Leader>b :<C-u>UnitePrevious<CR>
-if executable('pt')
-  let g:unite_source_grep_command = 'pt'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
-  let g:unite_source_grep_recursive_opt = ''
-  let g:unite_source_grep_encoding = 'utf-8'
-endif
-
-"
 " tagbar
 "
 if v:version >= 703
@@ -558,9 +558,12 @@ endif
 " omnicppcomplete
 "
 " Show sig prototypes
-let OmniCpp_ShowPrototypeInAbbr=1
+let OmniCpp_ShowPrototypeInAbbr = 1
 " Popup members of :: scope
 let OmniCpp_MayCompleteScope = 1
+
+" clang-format
+let g:clang_format#detect_style_file = 1
 
 "
 " Extra localised or experimental vimrc settings are loaded from file.
