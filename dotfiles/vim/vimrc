@@ -317,7 +317,7 @@ endif
 " When running a vim gui (e.g. macvim)
 "
 if has('gui_running')
-    set guifont=meslo-powerline:h14
+    set guifont=Meslo\ LG\ S\ for\ Powerline:h14
 
     set go-=T
     set go-=l
@@ -456,9 +456,9 @@ nmap <silent> <f4> :QFixToggle<cr>
 " grep
 " :grep <search-term>
 "
-if executable('pt')
+if executable('rg')
     " goes to quickfix
-    set grepprg=pt\ --nogroup\ --nocolor\ --column
+    set grepprg=rg\ --color\ never\ --column
     set grepformat=%f:%l:%c%m
     nmap <silent> <right> :cnext<cr>
     nmap <silent> <left> :cprev<cr>
@@ -490,6 +490,8 @@ endif
 Plug 'tpope/vim-fugitive' " git
 Plug 'OmniCppComplete', { 'for': 'cpp' }
 Plug 'rhysd/vim-clang-format'
+Plug 'beyondmarc/glsl.vim' " opengl shader language
+Plug 'Chiel92/vim-autoformat'
 call plug#end()
 endif
 
