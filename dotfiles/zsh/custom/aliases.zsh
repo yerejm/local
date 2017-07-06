@@ -21,7 +21,7 @@ alias x=exit
 alias vi="vim"
 alias mirror="wget -r -k -np --random-wait --tries=0 --retry-connrefused -N"
 
-alias webserve="python -m SimpleHTTPServer 8000"
+alias webserve="python -m http.server"
 alias dl="wget -c -t 0"
 
 alias vup="vag up"
