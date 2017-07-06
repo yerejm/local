@@ -8,17 +8,6 @@ CURDIR=$(dirname "$(pwd)/${0}")
 FONT="https://github.com/powerline/fonts/raw/master/Meslo/Meslo%20LG%20S%20Regular%20for%20Powerline.otf"
 FONT_INSTALLER="https://raw.githubusercontent.com/powerline/fonts/master/install.sh"
 
-# install vim fonts
-[ -d "${HOME}/Library" ] && mkdir -p "${HOME}/Library/Fonts"
-fontdir="${CURDIR}/fonts"
-if [ ! -d "$fontdir" ]; then
-  mkdir -p "$fontdir" && (\
-    cd "${fontdir}" && curl -J -L -o meslo-powerline.otf "${FONT}" && \
-    curl -J -L -O  "${FONT_INSTALLER}" && \
-    bash install.sh \
-    )
-fi
-
 # install dotfile
 ln -f -s "${CURDIR}/vimrc" "${HOME}/.vimrc"
 

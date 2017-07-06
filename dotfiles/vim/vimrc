@@ -471,7 +471,7 @@ autocmd FileType svn,*commit* setlocal spell noundofile
 " plugins
 "
 silent! if plug#begin('~/.vim/plugged')
-Plug 'wombat256.vim' " colorscheme
+Plug 'vim-scripts/wombat256.vim' " colorscheme
 Plug 'tomtom/tcomment_vim' " gc and gcc comment toggling
 Plug 'bling/vim-airline' " powerline status line
 
@@ -479,7 +479,7 @@ Plug 'bling/vim-airline' " powerline status line
 Plug 'christoomey/vim-tmux-navigator'
 
 " navigation
-Plug 'bufexplorer.zip'
+Plug 'vim-scripts/bufexplorer.zip'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
 
@@ -488,7 +488,7 @@ if v:version >= 703
     Plug 'majutsushi/tagbar' " c++ structure view
 endif
 Plug 'tpope/vim-fugitive' " git
-Plug 'OmniCppComplete', { 'for': 'cpp' }
+Plug 'vim-scripts/OmniCppComplete', { 'for': 'cpp' }
 Plug 'rhysd/vim-clang-format'
 Plug 'beyondmarc/glsl.vim' " opengl shader language
 Plug 'Chiel92/vim-autoformat'
