@@ -52,8 +52,6 @@ endif
 
 if has('syntax')
     syntax enable
-    " highlight current line
-    set cursorline
     " highlight column after textwidth
     set colorcolumn=+1
 endif
@@ -93,8 +91,6 @@ set tabpagemax=50
 
 " show line numbers
 set number
-" show line number of active line, but relative numbers elsewhere
-set relativenumber
 
 " hide buffers when not displayed
 set hidden
