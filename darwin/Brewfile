@@ -13,6 +13,7 @@ brew 'reattach-to-user-namespace'
 brew 'vim', args: [ 'without-perl', 'without-ruby' ]
 brew 'ctags'
 brew 'ripgrep'
+brew 'fzf'
 
 brew 'git'
 brew 'mercurial'
