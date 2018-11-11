@@ -8,9 +8,8 @@ cask 'the-unarchiver'
 brew 'wget'
 
 brew 'tmux'
-brew 'reattach-to-user-namespace'
 
-brew 'vim', args: [ 'without-perl', 'without-ruby' ]
+brew 'vim', args: [ 'without-perl', 'without-ruby', 'without-python' ]
 brew 'ctags'
 brew 'ripgrep'
 brew 'fzf'

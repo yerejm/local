@@ -35,5 +35,4 @@ alias vss="vag status"
 alias vsh="vag ssh"
 
 alias mmv="noglob zmv -W"
-
-alias outdated="brew cask list | xargs -P 8 -I % sh -c 'brew cask info % | grep %:' | awk -F': ' '{print \$1\"/\"\$2}' | xargs -P 8 -I % sh -c 'if ! ls /usr/local/Caskroom/% >/dev/null 2>&1; then echo %; fi'"
+alias cask="brew cask"

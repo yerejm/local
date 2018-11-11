@@ -203,6 +203,9 @@ set cindent
 " Allow backspace over everything in insert mode
 set backspace=indent,eol,start
 
+" copy/paste to OS clipboard
+set clipboard=unnamed
+
 " auto-formatting (global setting)
 " t - autowrap using textwidth
 " c - autowrap comments automatically inserting the current comment leader
@@ -211,7 +214,7 @@ set backspace=indent,eol,start
 " n - recognise:
 "       1. numbered lists, and
 "       2. wrap then to the text width
-set formatoptions=tcqrn
+" set formatoptions=tcqrn
 if v:version > 703 || v:version == 703 && has("patch541")
     " Where it makes sense, remove a comment leader when joining lines
     set formatoptions+=j
@@ -327,7 +330,6 @@ if has('gui_running')
     set fillchars+=vert:│
 
     autocmd FocusLost * silent! wa " auto-save on leaving vim window
-    set clipboard=unnamed " mac osx clipboard
 endif
 
 "
@@ -467,7 +469,6 @@ autocmd FileType svn,*commit* setlocal spell noundofile
 " plugins
 "
 silent! if plug#begin('~/.vim/plugged')
-" Plug 'vim-scripts/wombat256.vim' " colorscheme
 Plug 'flazz/vim-colorschemes'
 Plug 'tomtom/tcomment_vim' " gc and gcc comment toggling
 Plug 'bling/vim-airline' " powerline status line
@@ -478,7 +479,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " navigation
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 
 " dev
@@ -490,6 +490,7 @@ Plug 'vim-scripts/OmniCppComplete', { 'for': 'cpp' }
 Plug 'rhysd/vim-clang-format'
 Plug 'beyondmarc/glsl.vim' " opengl shader language
 Plug 'Chiel92/vim-autoformat'
+Plug 'godlygeek/tabular'
 call plug#end()
 endif
 
@@ -569,6 +570,13 @@ let OmniCpp_MayCompleteScope = 1
 
 " clang-format
 let g:clang_format#detect_style_file = 1
+
+" ale
+let g:airline#extensions#ale#enabled = 1
+let g:ale_linters = {
+\   'cpp': [],
+\   'c': [],
+\}
 
 "
 " Extra localised or experimental vimrc settings are loaded from file.
