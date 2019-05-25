@@ -10,6 +10,7 @@ brew 'cmake'
 brew 'coreutils'
 brew 'ctags'
 brew 'curl'
+brew 'fd'
 brew 'fzf'
 brew 'git'
 brew 'llvm', args: [ 'with-clang-extra-tools', 'with-clang' ]

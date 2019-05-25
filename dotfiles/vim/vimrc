@@ -161,11 +161,6 @@ if has('persistent_undo')
     au BufWritePre /tmp/*,/private/tmp/* setlocal noundofile
 endif
 
-if has('autochdir')
-    " go to file's directory on open
-    set autochdir
-endif
-
 if has('windows')
     " horizontal splits always grow down
     set splitbelow
@@ -431,7 +426,6 @@ inoremap <expr> <s-tab> <SID>super_duper_tab("\<c-p>", "\<s-tab>")
 " leader
 "
 let mapleader="\<space>"
-nnoremap <Leader>o :CtrlP<CR>
 nnoremap <Leader>w <C-w>v
 
 "
@@ -541,16 +535,9 @@ autocmd FileType nerdtree setlocal nolist
 nnoremap <f2> :NERDTreeToggle<cr>
 
 "
-"ctrlp
-"
-let g:ctrlp_open_new_file = 'v' " open new in vsplit
-let g:ctrlp_open_multiple_files = 'v' " open in vsplit
-" Use .gitignore if it exists to filter files
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-"
 "fzf
 "
+let $FZF_DEFAULT_COMMAND = 'fd --hidden --type f --exclude .git'
 nnoremap <c-p> :FZF<cr>
 
 "
