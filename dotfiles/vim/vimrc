@@ -3,6 +3,8 @@
 " There is no vi, only vim
 set nocompatible
 
+set nomodeline
+
 if has('autocmd')
     filetype plugin indent on
 endif

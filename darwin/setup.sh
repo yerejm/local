@@ -24,10 +24,3 @@ fi
 brew tap Homebrew/bundle
 brew bundle --file="${CURDIR}/Brewfile"
 
-if ! grep cachier "$HOME/.vagrant.d/plugins.json" >/dev/null 2>&1; then
-  vagrant plugin install vagrant-cachier
-fi
-if ! grep hostsupdater "$HOME/.vagrant.d/plugins.json" >/dev/null 2>&1; then
-  vagrant plugin install vagrant-hostsupdater
-fi
-
