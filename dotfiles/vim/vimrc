@@ -97,6 +97,9 @@ set number
 " hide buffers when not displayed
 set hidden
 
+" allow macro to complete before redrawing the screen
+set lazyredraw
+
 " confirm when changes are not saved (for hidden)
 set confirm
 
@@ -476,6 +479,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'mbbill/undotree'
+Plug 'airblade/vim-rooter'
 
 " dev
 if v:version >= 703
@@ -487,6 +492,7 @@ Plug 'rhysd/vim-clang-format'
 Plug 'beyondmarc/glsl.vim' " opengl shader language
 Plug 'Chiel92/vim-autoformat'
 Plug 'godlygeek/tabular'
+Plug 'machakann/vim-swap'
 call plug#end()
 endif
 
@@ -542,6 +548,9 @@ nnoremap <f2> :NERDTreeToggle<cr>
 let $FZF_DEFAULT_COMMAND = 'fd --hidden --type f --exclude .git'
 nnoremap <c-p> :FZF<cr>
 
+" fugitive
+set tags^=.git/tags;~
+
 "
 " tagbar
 "
@@ -566,6 +575,13 @@ let g:ale_linters = {
 \   'cpp': [],
 \   'c': [],
 \}
+
+" undotree
+nnoremap <f5> :UndotreeToggle<cr>
+
+" vim-rooter
+let g:rooter_change_directory_for_non_project_files = 'current' " set autochdir
+let g:rooter_silent_chdir = 1
 
 "
 " Extra localised or experimental vimrc settings are loaded from file.

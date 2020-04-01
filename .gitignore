@@ -3,3 +3,4 @@
 .vagrant
 dotfiles/vim/fonts
 darwin/brew-install
+dotfiles/zsh/custom/plugins
