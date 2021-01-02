@@ -547,6 +547,12 @@ nnoremap <f2> :NERDTreeToggle<cr>
 "
 let $FZF_DEFAULT_COMMAND = 'fd --hidden --type f --exclude .git'
 nnoremap <c-p> :FZF<cr>
+" fzf rg search
+nnoremap <c-g> :Rg<cr>
+" fzf buffer search
+nnoremap <silent><leader>l :Buffers<cr>
+" fzf git commit log
+nnoremap <f3> :Commits<cr>
 
 " fugitive
 set tags^=.git/tags;~
