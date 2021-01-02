@@ -493,6 +493,7 @@ Plug 'beyondmarc/glsl.vim' " opengl shader language
 Plug 'Chiel92/vim-autoformat'
 Plug 'godlygeek/tabular'
 Plug 'machakann/vim-swap'
+Plug 'ludovicchabant/vim-gutentags'
 call plug#end()
 endif
 
@@ -553,6 +554,9 @@ nnoremap <c-g> :Rg<cr>
 nnoremap <silent><leader>l :Buffers<cr>
 " fzf git commit log
 nnoremap <f3> :Commits<cr>
+
+" gutentags
+let g:gutentags_ctags_tagfile = '.git/tags'
 
 " fugitive
 set tags^=.git/tags;~
