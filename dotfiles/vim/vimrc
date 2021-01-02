@@ -42,10 +42,9 @@ set ttimeout
 set ttimeoutlen=100
 
 if has('extra_search')
-    " highlight search term
-    set hlsearch
-    " search as you type
-    set incsearch
+    set hlsearch " highlight search term
+    set incsearch " search as you type
+    set smartcase ignorecase " case insensitive search, unless capitals are used
     " Use <CTRL-L to clear highlighting
     if maparg('<C-L>', 'n') ==# ''
         nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
