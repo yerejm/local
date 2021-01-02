@@ -53,6 +53,11 @@ plugins=(git mercurial osx brew vagrant extract)
 
 # User configuration
 
+# Make Homebrew’s completions available in zsh
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
 # Prime autocompletion before sourcing oh-my-zsh.
 # Dependencies are not handled well when completions defined in plugins are
 # processed. e.g. git
