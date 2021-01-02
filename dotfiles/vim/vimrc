@@ -462,6 +462,7 @@ endif
 
 " spell check commit log
 autocmd FileType svn,*commit* setlocal spell noundofile
+autocmd FileType text setlocal spell
 
 "
 " plugins
