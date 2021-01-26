@@ -35,4 +35,3 @@ alias vss="vag status"
 alias vsh="vag ssh"
 
 alias mmv="noglob zmv -W"
-alias cask="brew cask"

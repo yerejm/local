@@ -23,3 +23,8 @@ function procfile {
   done
 }
 
+function cask {
+    local CMD=$1
+    shift
+    brew $CMD --cask $@
+}
