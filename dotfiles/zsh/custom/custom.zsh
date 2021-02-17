@@ -30,6 +30,8 @@ if type brew &>/dev/null; then
   export FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob '"'"'!.git/'"'"
+
 #####################################################
 # BINDS
 #####################################################
