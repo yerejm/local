@@ -43,6 +43,8 @@ bindkey 'OB' history-beginning-search-forward
 # ALIASES
 #####################################################
 
+alias zshrc="vim ~/.oh-my-zsh/custom/custom.zsh"
+
 if which caffeinate > /dev/null; then
   alias vag="caffeinate vagrant"
   alias wget="caffeinate wget"
