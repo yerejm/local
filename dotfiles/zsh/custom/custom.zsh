@@ -5,6 +5,11 @@
 # Enable better mv, e.g. zmv '(*).md' '$1.markdown' for mass extension change
 autoload -U zmv
 
+# Automatically escape shell characters when pasting, e.g. URLs with &
+unset zle_bracketed_paste # because it breaks url pasting
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
 #####################################################
 # EXPORTS
 #####################################################
