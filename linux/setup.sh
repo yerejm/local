@@ -26,3 +26,8 @@ sudo dnf install -y \
 	g++ \
 	make \
 	ninja-build
+
+# brew ol' buddy, don't let me down...
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install \
+    ripgrep-all
