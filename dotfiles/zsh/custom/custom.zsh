@@ -23,8 +23,13 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export MAKEFLAGS="-j$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)"
 
 if [ "$(uname)" = "Linux" ]; then
-    export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+    PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
     export MANPATH=/home/linuxbrew/.linuxbrew/share/man:$MANPATH
+    if [ -d ~/.mojosetup ]; then
+        PATH=~/.mojosetup/bin:$PATH
+        CMAKE_PREFIX_PATH="~/.mojosetup/cmake:$CMAKE_PREFIX_PATH"
+    fi
+    export PATH CMAKE_PREFIX_PATH
 else
     export MANPATH=/usr/local/share/man:$MANPATH
 fi
