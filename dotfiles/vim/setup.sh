@@ -17,7 +17,9 @@ VIM_TMP="${VIM_HOME}/tmp"
 for d in undo backup swap; do
   mkdir -p "${VIM_TMP}/${d}"
 done
-ln -f -s "${CURDIR}/ftplugin" "${HOME}/.vim/ftplugin"
+if [ ! -e "${HOME}/.vim/ftplugin" ]; then
+    ln -f -s "${CURDIR}/ftplugin" "${HOME}/.vim/ftplugin"
+fi
 
 # install vim-plug and plugins
 if [ ! -f "${VIM_HOME}/autoload/plug.vim" ]; then

@@ -6,7 +6,9 @@ set -o pipefail
 
 CURDIR=$(dirname "$(pwd)/${0}")
 
-ln -f -s "$(pwd)" "${HOME}/.config/tmux"
+if [ ! -e "$HOME/.config/tmux" ]; then
+    ln -f -s "$(pwd)" "$HOME/.config/tmux"
+fi
 
 TMUX_TPM_DIR="${HOME}/.config/tmux/plugins/tpm"
 if [ -e "${TMUX_TPM_DIR}" ]; then
