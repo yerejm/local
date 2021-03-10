@@ -7,6 +7,7 @@ set -o pipefail
 CURDIR=$(dirname "$(pwd)/${0}")
 
 if [ ! -e "$HOME/.config/tmux" ]; then
+    mkdir "$HOME/.config"
     ln -f -s "$(pwd)" "$HOME/.config/tmux"
 fi
 
